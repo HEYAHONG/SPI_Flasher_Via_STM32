@@ -14,6 +14,13 @@ typedef struct
 //临时存储linecode数据
 extern linecode_t linecode;
 
+//工作模式变量
+typedef enum {
+	Mode_UART=0,
+} WorkMode_t;
+
+extern WorkMode_t WorkMode;
+
 void loop_user_call();//在Main函数里循环调用此函数
 
 #define __USERAPP_H__
