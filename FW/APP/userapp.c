@@ -26,8 +26,9 @@ void loop_user_call()//在Main函数里循环调用此函数
 	if(linecode.IsUpdate)
 	{
 		HAL_Delay(20);//延时20ms设置通信参数
-		if(linecode.Rate<1500000)//速率小于1.5Mbps，为串口模式(及其有限的串口支持)
+		if(linecode.Rate<1500000)//速率小于1.5Mbps，为串口模式(极其有限的串口支持)
 		{//重新初始化串口
+			WorkMode=Mode_UART;
 			HAL_UART_DeInit(&huart2);
 			huart2.Instance = USART2;
 
@@ -49,7 +50,7 @@ void loop_user_call()//在Main函数里循环调用此函数
 			huart2.Init.Parity = UART_PARITY_NONE;
 			if(linecode.Parity==1)
 				huart2.Init.Parity = UART_PARITY_ODD;
-			if(linecode.Parity==1)
+			if(linecode.Parity==2)
 				huart2.Init.Parity = UART_PARITY_EVEN;
 
 
