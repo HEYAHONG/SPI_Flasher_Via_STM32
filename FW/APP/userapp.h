@@ -7,8 +7,9 @@
 #include "stm32f1xx_hal.h"
 
 #include "useruart.h"
+#include "userspi.h"
 
-//导入硬件定义函数
+//导入硬件定义
 extern I2C_HandleTypeDef hi2c1;
 
 extern SPI_HandleTypeDef hspi1;
@@ -30,7 +31,9 @@ extern linecode_t linecode;
 
 //工作模式变量
 typedef enum {
-	Mode_UART=0,
+	Mode_UART=0,//串口透传模式
+	Mode_SPI_RAW,//原始SPI模式，将上位机发送的数据直接转化为spi帧发送出去。同时返回接收的数据。
+	Mode_SPI_CMD,//SPI命令模式，包含一些可简便操作的命令
 } WorkMode_t;
 
 extern WorkMode_t WorkMode;

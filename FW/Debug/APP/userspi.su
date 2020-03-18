@@ -1,0 +1,2 @@
+userspi.c:12:6:delay	16	static
+userspi.c:16:8:spi_transmitReceive	24	static

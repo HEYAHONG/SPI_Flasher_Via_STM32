@@ -1,5 +1,5 @@
-Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.o: \
- ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c \
+Core/Src/stm32f1xx_hal_timebase_tim.o: \
+ ../Core/Src/stm32f1xx_hal_timebase_tim.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \

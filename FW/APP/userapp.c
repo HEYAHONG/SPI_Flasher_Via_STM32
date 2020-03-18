@@ -76,6 +76,16 @@ void loop_user_call()//在Main函数里循环调用此函数
 			  }
 			 uart_start_receive();
 		}
+
+		if(linecode.Rate>=2000000)//切换为spi模式
+		{
+			WorkMode=Mode_SPI_RAW;
+
+			if(linecode.StopBits!=0)
+			{
+				WorkMode=Mode_SPI_CMD;
+			}
+		}
 		linecode.IsUpdate=0;
 	}
 }
@@ -86,6 +96,11 @@ void cdc_receive_call(uint8_t* Buf, uint32_t Len)//由USB CDC/ACM接收数据时
 	{
 	default:
 		uart_transmit(Buf,Len);
+		break;
+	case Mode_SPI_RAW:
+		CDC_Transmit_FS(spi_transmitReceive(Buf,Len),Len);
+		break;
+	case Mode_SPI_CMD:
 		break;
 
 	}
