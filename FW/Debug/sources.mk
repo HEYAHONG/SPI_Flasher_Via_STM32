@@ -27,6 +27,8 @@ OBJCOPY_BIN :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+3rdparty/EEPROM24xx \
+3rdparty/w25qxx \
 APP \
 Core/Src \
 Core/Startup \

@@ -16,6 +16,8 @@ RM := rm -rf
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include APP/subdir.mk
+-include 3rdparty/w25qxx/subdir.mk
+-include 3rdparty/EEPROM24xx/subdir.mk
 -include subdir.mk
 -include objects.mk
 

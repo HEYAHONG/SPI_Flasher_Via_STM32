@@ -96,11 +96,20 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1618568181" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.974473472" name="w25qxxConf.h" rcbsApplicability="disable" resourcePath="3rdparty/w25qxx/w25qxxConf.h" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.169078914" name="LICENSE" rcbsApplicability="disable" resourcePath="3rdparty/w25qxx/LICENSE" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.1194866775" name="README.md" rcbsApplicability="disable" resourcePath="3rdparty/w25qxx/README.md" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.729428001" name="eeprom24xxConfig.h" rcbsApplicability="disable" resourcePath="3rdparty/EEPROM24xx/eeprom24xxConfig.h" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.1536486352" name="TestEEprom24xx.rar" rcbsApplicability="disable" resourcePath="3rdparty/EEPROM24xx/TestEEprom24xx.rar" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.869127903" name="LICENSE" rcbsApplicability="disable" resourcePath="3rdparty/EEPROM24xx/LICENSE" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1795843886.967656460" name="README.md" rcbsApplicability="disable" resourcePath="3rdparty/EEPROM24xx/README.md" toolsToInvoke=""/>
 					<sourceEntries>
+						<entry excluding="README.md|LICENSE|TestEEprom24xx.rar" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="3rdparty/EEPROM24xx"/>
+						<entry excluding="README.md|LICENSE" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="3rdparty/w25qxx"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="APP"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="USB_DEVICE"/>
 					</sourceEntries>
 				</configuration>
@@ -200,10 +209,12 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.41867558" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.1335866584.1637113173" name="w25qxxConf.h" rcbsApplicability="disable" resourcePath="3rdparty/w25qxx/w25qxxConf.h" toolsToInvoke=""/>
 					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="3rdparty"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="USB_DEVICE"/>
 					</sourceEntries>
 				</configuration>
