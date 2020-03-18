@@ -1,0 +1,5 @@
+useruart.c:12:9:uart_transmit	32	static
+useruart.c:18:6:uart_start_receive	8	static
+useruart.c:27:6:uart_finish_receive	16	static
+useruart.c:39:6:HAL_UART_RxCpltCallback	16	static
+useruart.c:44:6:HAL_UART_RxHalfCpltCallback	16	static
