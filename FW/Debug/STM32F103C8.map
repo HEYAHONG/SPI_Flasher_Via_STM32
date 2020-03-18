@@ -113,14 +113,16 @@ Discarded input sections
  .text          0x0000000000000000        0x0 3rdparty/EEPROM24xx/eeprom24xx.o
  .data          0x0000000000000000        0x0 3rdparty/EEPROM24xx/eeprom24xx.o
  .bss           0x0000000000000000        0x0 3rdparty/EEPROM24xx/eeprom24xx.o
+ .data._EEPROM_SIZE_KBIT
+                0x0000000000000000        0x4 3rdparty/EEPROM24xx/eeprom24xx.o
  .text.EEPROM24XX_IsConnected
                 0x0000000000000000       0x24 3rdparty/EEPROM24xx/eeprom24xx.o
  .text.EEPROM24XX_Save
                 0x0000000000000000       0x54 3rdparty/EEPROM24xx/eeprom24xx.o
  .text.EEPROM24XX_Load
                 0x0000000000000000       0x44 3rdparty/EEPROM24xx/eeprom24xx.o
- .debug_info    0x0000000000000000     0x13fe 3rdparty/EEPROM24xx/eeprom24xx.o
- .debug_abbrev  0x0000000000000000      0x1d4 3rdparty/EEPROM24xx/eeprom24xx.o
+ .debug_info    0x0000000000000000     0x1416 3rdparty/EEPROM24xx/eeprom24xx.o
+ .debug_abbrev  0x0000000000000000      0x1e1 3rdparty/EEPROM24xx/eeprom24xx.o
  .debug_aranges
                 0x0000000000000000       0x30 3rdparty/EEPROM24xx/eeprom24xx.o
  .debug_ranges  0x0000000000000000       0x20 3rdparty/EEPROM24xx/eeprom24xx.o
@@ -183,9 +185,9 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x83 3rdparty/EEPROM24xx/eeprom24xx.o
  .debug_macro   0x0000000000000000       0x16 3rdparty/EEPROM24xx/eeprom24xx.o
  .debug_macro   0x0000000000000000       0x22 3rdparty/EEPROM24xx/eeprom24xx.o
- .debug_macro   0x0000000000000000       0x22 3rdparty/EEPROM24xx/eeprom24xx.o
- .debug_line    0x0000000000000000      0x8b7 3rdparty/EEPROM24xx/eeprom24xx.o
- .debug_str     0x0000000000000000    0x73a6d 3rdparty/EEPROM24xx/eeprom24xx.o
+ .debug_macro   0x0000000000000000       0x1c 3rdparty/EEPROM24xx/eeprom24xx.o
+ .debug_line    0x0000000000000000      0x8b9 3rdparty/EEPROM24xx/eeprom24xx.o
+ .debug_str     0x0000000000000000    0x73a6a 3rdparty/EEPROM24xx/eeprom24xx.o
  .comment       0x0000000000000000       0x7c 3rdparty/EEPROM24xx/eeprom24xx.o
  .debug_frame   0x0000000000000000       0x74 3rdparty/EEPROM24xx/eeprom24xx.o
  .ARM.attributes

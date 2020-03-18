@@ -4,6 +4,8 @@
 #if (_EEPROM_FREERTOS_IS_ENABLE==1)
 #include "cmsis_os.h"
 #endif
+
+size_t _EEPROM_SIZE_KBIT=64;//容量设置
 //##########################################################################
 bool		EEPROM24XX_IsConnected(void)
 {
