@@ -1,1 +1,4 @@
-userapp.c:24:6:loop_user_call	8	static
+userapp.c:17:6:init_user_call	4	static
+userapp.c:22:6:loop_user_call	8	static
+userapp.c:83:6:cdc_receive_call	16	static
+userapp.c:94:6:uart_receive_call	16	static

@@ -1,13 +1,6 @@
 #include "userapp.h"
-#include "main.h"
-#include "stm32f1xx_hal.h"
 
-//导入硬件定义函数
-extern I2C_HandleTypeDef hi2c1;
 
-extern SPI_HandleTypeDef hspi1;
-
-extern UART_HandleTypeDef huart2;
 
 //只支持GCC
 linecode_t linecode=
@@ -21,6 +14,11 @@ linecode_t linecode=
 
 WorkMode_t WorkMode=Mode_UART;
 
+void init_user_call()//在硬件初始化完成后调用
+{
+	__HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);//打开总线空闲中断
+}
+
 void loop_user_call()//在Main函数里循环调用此函数
 {
 	if(linecode.IsUpdate)
@@ -29,7 +27,6 @@ void loop_user_call()//在Main函数里循环调用此函数
 		if(linecode.Rate<1500000)//速率小于1.5Mbps，为串口模式(极其有限的串口支持)
 		{//重新初始化串口
 			WorkMode=Mode_UART;
-			HAL_UART_DeInit(&huart2);
 			huart2.Instance = USART2;
 
 			huart2.Init.BaudRate = linecode.Rate;//linecode的速率
@@ -63,7 +60,6 @@ void loop_user_call()//在Main函数里循环调用此函数
 
 			 if (HAL_UART_Init(&huart2) != HAL_OK)
 			  {//打开失败则使用默认设置
-				  HAL_UART_DeInit(&huart2);
 				  huart2.Instance = USART2;
 				  huart2.Init.BaudRate = 115200;
 				  huart2.Init.WordLength = UART_WORDLENGTH_8B;
@@ -78,7 +74,26 @@ void loop_user_call()//在Main函数里循环调用此函数
 				  linecode.Rate=115200;
 				  linecode.StopBits=0;
 			  }
+			 uart_start_receive();
 		}
 		linecode.IsUpdate=0;
 	}
+}
+
+void cdc_receive_call(uint8_t* Buf, uint32_t Len)//由USB CDC/ACM接收数据时调用
+{
+	switch(WorkMode)
+	{
+	default:
+		uart_transmit(Buf,Len);
+		break;
+
+	}
+}
+
+void uart_receive_call(void * buf,size_t len)//接收数据完成后调用此函数
+{
+	if(WorkMode!=Mode_UART)
+		return;//检查模式
+	CDC_Transmit_FS(buf,len);//发送给上位机
 }
