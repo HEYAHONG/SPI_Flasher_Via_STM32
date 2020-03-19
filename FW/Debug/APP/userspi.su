@@ -1,2 +1,4 @@
-userspi.c:12:6:delay	16	static
-userspi.c:16:8:spi_transmitReceive	24	static
+userspi.c:11:17:U8A2U32	24	static
+userspi.c:27:6:delay	16	static
+userspi.c:31:8:spi_transmitReceive	24	static
+userspi.c:43:6:spi_cmd_process_call	16	static

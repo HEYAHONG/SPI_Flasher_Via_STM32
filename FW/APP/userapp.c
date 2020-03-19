@@ -88,6 +88,9 @@ void loop_user_call()//在Main函数里循环调用此函数
 		}
 		linecode.IsUpdate=0;
 	}
+
+	if(WorkMode==Mode_SPI_CMD)
+			spi_cmd_process_call();//调用spi命令处理函数（不在中断中处理）
 }
 
 void cdc_receive_call(uint8_t* Buf, uint32_t Len)//由USB CDC/ACM接收数据时调用
@@ -101,6 +104,10 @@ void cdc_receive_call(uint8_t* Buf, uint32_t Len)//由USB CDC/ACM接收数据时
 		CDC_Transmit_FS(spi_transmitReceive(Buf,Len),Len);
 		break;
 	case Mode_SPI_CMD:
+		if(spi_cmd_data.IsUpdate!=0) break;//上条命令未处理，忽略下一条命令
+		spi_cmd_data.length=Len;
+		memcpy(spi_cmd_data.data,Buf,Len);
+		spi_cmd_data.IsUpdate++;
 		break;
 
 	}
