@@ -125,6 +125,119 @@ void spi_cmd_process_call()//spi命令模式处理函数
 			}
 
 			break;
+		case 8://8号命令，W25qxx_WriteByte，写入1字节数据(需要先手动擦除)，地址(4字节)+数据(1字节)
+			if(spi_cmd_data.length>=6)
+			{
+				W25qxx_WriteByte(spi_cmd_data.data[5],U8A2U32(&(spi_cmd_data.data[1])));
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+			break;
+		case 9://9号命令，W25qxx_WritePage,按页写入数据，地址(4字节)+偏移(4字节)+数据(不定字节)，均为小端模式
+			if(spi_cmd_data.length>=10)
+			{
+				W25qxx_WritePage(&(spi_cmd_data.data[9]),U8A2U32(&(spi_cmd_data.data[1])),U8A2U32(&(spi_cmd_data.data[5])),spi_cmd_data.length-9);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
+		case 10://10号命令,W25qxx_WriteSector,按扇区写入数据，地址(4字节)+偏移(4字节)+数据(不定字节)，均为小端模式
+			if(spi_cmd_data.length>=10)
+			{
+				W25qxx_WriteSector(&(spi_cmd_data.data[9]),U8A2U32(&(spi_cmd_data.data[1])),U8A2U32(&(spi_cmd_data.data[5])),spi_cmd_data.length-9);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+			break;
+		case 11://11号命令,W25qxx_WriteBlock,按块写入数据，地址(4字节)+偏移(4字节)+数据(不定字节)，均为小端模式
+			if(spi_cmd_data.length>=10)
+			{
+				W25qxx_WriteBlock(&(spi_cmd_data.data[9]),U8A2U32(&(spi_cmd_data.data[1])),U8A2U32(&(spi_cmd_data.data[5])),spi_cmd_data.length-9);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
+		case 12://12号命令，W25qxx_ReadByte，读取1字节数据，地址(4字节)
+			if(spi_cmd_data.length>=5)
+			{
+				W25qxx_ReadByte(&spi_cmd_data.data[5],U8A2U32(&spi_cmd_data.data[1]));
+				spi_cmd_data.length=6;
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
+		case 13://13号命令，W25qxx_ReadBytes，读多字节数据，地址(4字节)+数量(4字节)
+			if(spi_cmd_data.length>=9 && U8A2U32(&spi_cmd_data.data[5]) <= 512)//1次最多读512字节
+			{
+				W25qxx_ReadBytes(&spi_cmd_data.data[9],U8A2U32(&spi_cmd_data.data[1]),U8A2U32(&spi_cmd_data.data[5]));
+				spi_cmd_data.length=9+U8A2U32(&spi_cmd_data.data[5]);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
+		case 14://14号命令，W25qxx_ReadPage，按页读多字节数据，地址(4字节)+偏移(4字节)+数量(4字节),数量需要大于0
+			if(spi_cmd_data.length>=13 && U8A2U32(&spi_cmd_data.data[9]) <= 512)//1次最多读512字节
+			{
+				W25qxx_ReadPage(&spi_cmd_data.data[13],U8A2U32(&spi_cmd_data.data[1]),U8A2U32(&spi_cmd_data.data[5]),U8A2U32(&spi_cmd_data.data[9]));
+				spi_cmd_data.length=13+U8A2U32(&spi_cmd_data.data[9]);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
+
+		case 15://15号命令，W25qxx_ReadSector，按页读多字节数据，地址(4字节)+偏移(4字节)+数量(4字节),数量需要大于0
+			if(spi_cmd_data.length>=13 && U8A2U32(&spi_cmd_data.data[9]) <= 512)//1次最多读512字节
+			{
+				W25qxx_ReadSector(&spi_cmd_data.data[13],U8A2U32(&spi_cmd_data.data[1]),U8A2U32(&spi_cmd_data.data[5]),U8A2U32(&spi_cmd_data.data[9]));
+				spi_cmd_data.length=13+U8A2U32(&spi_cmd_data.data[9]);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
+
+		case 16://16号命令，W25qxx_ReadBlock，按页读多字节数据，地址(4字节)+偏移(4字节)+数量(4字节),数量需要大于0
+			if(spi_cmd_data.length>=13 && U8A2U32(&spi_cmd_data.data[9]) <= 512)
+			{
+				W25qxx_ReadBlock(&spi_cmd_data.data[13],U8A2U32(&spi_cmd_data.data[1]),U8A2U32(&spi_cmd_data.data[5]),U8A2U32(&spi_cmd_data.data[9]));
+				spi_cmd_data.length=13+U8A2U32(&spi_cmd_data.data[9]);
+			}
+			else
+			{
+				spi_cmd_data.data[0]=0xff;//失败命令的返回
+				spi_cmd_data.length=0x01;
+			}
+
+			break;
 		}
 
 		CDC_Transmit_FS(spi_cmd_data.data,spi_cmd_data.length);
