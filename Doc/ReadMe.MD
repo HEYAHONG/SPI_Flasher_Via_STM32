@@ -15,6 +15,8 @@
 
 当硬件被接入时，会自动安装通用驱动，在Windows 10下会分配一个串口号COMx(x为不固定的数字值)，在linux下会被udev自动分配到/dev/ttyACMx(x为不固定的数字值)。此时，便可以像操作普通串口设备一样操作硬件。
 
+![windows识别CDC ACM设备](windows_com.jpg)
+
 ![linux识别CDC ACM设备](linux_ttyacm.jpg)
 
 
