@@ -77,6 +77,16 @@ void loop_user_call()//在Main函数里循环调用此函数
 			 uart_start_receive();
 		}
 
+		if(linecode.Rate>=1500000)//切换为i2c模式
+		{
+			WorkMode=Mode_I2C_RAW;
+
+			if(linecode.StopBits!=0)
+			{
+						WorkMode=Mode_I2C_CMD;
+			}
+		}
+
 		if(linecode.Rate>=2000000)//切换为spi模式
 		{
 			WorkMode=Mode_SPI_RAW;
@@ -108,6 +118,17 @@ void cdc_receive_call(uint8_t* Buf, uint32_t Len)//由USB CDC/ACM接收数据时
 		spi_cmd_data.length=Len;
 		memcpy(spi_cmd_data.data,Buf,Len);
 		spi_cmd_data.IsUpdate++;
+		break;
+	case Mode_I2C_RAW:
+		if(Buf[0] & 0x01)//首字符表示8位器件地址(最低位表示读/写)，写入/读取长度位Len-1
+		{
+			HAL_I2C_Master_Receive(&hi2c1,Buf[0],&Buf[1],Len-1,1000+Len);
+		}
+		else
+		{
+			HAL_I2C_Master_Transmit(&hi2c1,Buf[0],&Buf[1],Len-1,1000+Len);
+		}
+		CDC_Transmit_FS(Buf,Len);
 		break;
 
 	}

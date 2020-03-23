@@ -8,6 +8,7 @@
 
 #include "useruart.h"
 #include "userspi.h"
+#include "useri2c.h"
 
 //导入硬件定义
 extern I2C_HandleTypeDef hi2c1;
@@ -34,6 +35,8 @@ typedef enum {
 	Mode_UART=0,//串口透传模式
 	Mode_SPI_RAW,//原始SPI模式，将上位机发送的数据直接转化为spi帧发送出去。同时返回接收的数据。
 	Mode_SPI_CMD,//SPI命令模式，包含一些可简便操作的命令
+	Mode_I2C_RAW,//原始I2C模式，直接调用通信函数
+	Mode_I2C_CMD//命令模式，包含一些读取EEPROM的命令
 } WorkMode_t;
 
 extern WorkMode_t WorkMode;
