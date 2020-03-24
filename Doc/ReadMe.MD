@@ -50,6 +50,108 @@
 
 上位机发送的数据将被解析，第一个字节将会被认为是命令号，硬件通过这个命令号执行不同的函数，出错时，返回的数据的第一个字节为0xff。
 
+<table border=0 cellpadding=0 cellspacing=0 width=1457 class=xl6328029
+ style='border-collapse:collapse;table-layout:fixed;width:1094pt'>
+ <col class=xl6328029 width=72 style='width:54pt'>
+ <col class=xl6328029 width=74 style='mso-width-source:userset;mso-width-alt:
+ 2368;width:56pt'>
+ <col class=xl6328029 width=293 style='mso-width-source:userset;mso-width-alt:
+ 9376;width:220pt'>
+ <col class=xl6328029 width=72 style='width:54pt'>
+ <col class=xl6328029 width=202 style='mso-width-source:userset;mso-width-alt:
+ 6464;width:152pt'>
+ <col class=xl6328029 width=72 span=4 style='width:54pt'>
+ <col class=xl6328029 width=145 style='mso-width-source:userset;mso-width-alt:
+ 4640;width:109pt'>
+ <col class=xl6328029 width=311 style='mso-width-source:userset;mso-width-alt:
+ 9952;width:233pt'>
+ <tr height=36 style='mso-height-source:userset;height:27.0pt'>
+  <td colspan=11 height=36 class=xl6628029 width=1457 style='border-right:.5pt solid black;
+  height:27.0pt;width:1094pt'>Mode_I2C_CMD表</td>
+ </tr>
+ <tr height=17 style='mso-height-source:userset;height:12.75pt'>
+  <td colspan=11 height=17 class=xl7028029 style='border-right:.5pt solid black;
+  height:12.75pt'>注意:串口发送数据长度大于64字节时将不稳定</td>
+ </tr>
+ <tr height=35 style='mso-height-source:userset;height:26.25pt'>
+  <td rowspan=2 height=73 class=xl6428029 style='height:54.75pt;border-top:
+  none'>命令号</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数1</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数2</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数3</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数4</td>
+  <td rowspan=2 class=xl6428029 style='border-top:none'>成功返回长度</td>
+  <td rowspan=2 class=xl6428029 style='border-top:none'>说明</td>
+ </tr>
+ <tr height=38 style='mso-height-source:userset;height:28.5pt'>
+  <td height=38 class=xl6428029 style='height:28.5pt;border-top:none;
+  border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl6428029 style='height:14.25pt;border-top:none'>1</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>2</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>低字节在前，表示EEPROM容量(KBit)</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>同发送长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>设置EEPROM容量大小，检测EEPROM是否存在</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl6428029 style='height:14.25pt;border-top:none'>2</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>2</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>低字节在前，起始地址</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>2</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>低字节在前，读取长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>参数2+1</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>读取EEPROM内容</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl6428029 style='height:14.25pt;border-top:none'>3</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>2</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>低字节在前，起始地址</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>至帧结束</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>待写入数据</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>　</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>同发送长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>写EEPROM内容</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=72 style='width:54pt'></td>
+  <td width=74 style='width:56pt'></td>
+  <td width=293 style='width:220pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=202 style='width:152pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=145 style='width:109pt'></td>
+  <td width=311 style='width:233pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+
+
 ## 原始模式I2C
 
 帧格式: I2C器件地址+待发送/接收的的数据，其中器件地址为8位地址(最低位表示读(1)/写(0)),待发送/接收的由帧长度-1的值确定。
