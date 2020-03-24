@@ -50,6 +50,500 @@
 
 上位机发送的数据将被解析，第一个字节将会被认为是命令号，硬件通过这个命令号执行不同的函数，出错时，返回的数据的第一个字节为0xff。
 
+<table border=0 cellpadding=0 cellspacing=0 width=1663 class=xl6328029
+ style='border-collapse:collapse;table-layout:fixed;width:1250pt'>
+ <col class=xl6328029 width=72 style='width:54pt'>
+ <col class=xl6328029 width=61 style='mso-width-source:userset;mso-width-alt:
+ 1952;width:46pt'>
+ <col class=xl6328029 width=269 style='mso-width-source:userset;mso-width-alt:
+ 8608;width:202pt'>
+ <col class=xl6328029 width=66 style='mso-width-source:userset;mso-width-alt:
+ 2112;width:50pt'>
+ <col class=xl6328029 width=290 style='mso-width-source:userset;mso-width-alt:
+ 9280;width:218pt'>
+ <col class=xl6328029 width=74 style='mso-width-source:userset;mso-width-alt:
+ 2368;width:56pt'>
+ <col class=xl6328029 width=250 style='mso-width-source:userset;mso-width-alt:
+ 8000;width:188pt'>
+ <col class=xl6328029 width=72 span=2 style='width:54pt'>
+ <col class=xl6328029 width=126 style='mso-width-source:userset;mso-width-alt:
+ 4032;width:95pt'>
+ <col class=xl6328029 width=311 style='mso-width-source:userset;mso-width-alt:
+ 9952;width:233pt'>
+ <tr height=36 style='mso-height-source:userset;height:27.0pt'>
+  <td colspan=11 height=36 class=xl6528029 width=1663 style='border-right:.5pt solid black;
+  height:27.0pt;width:1250pt'>Mode_SPI_CMD表</td>
+ </tr>
+ <tr height=17 style='mso-height-source:userset;height:12.75pt'>
+  <td colspan=11 height=17 class=xl6828029 style='border-right:.5pt solid black;
+  height:12.75pt'>注意:串口发送数据长度大于64字节时将不稳定</td>
+ </tr>
+ <tr height=35 style='mso-height-source:userset;height:26.25pt'>
+  <td rowspan=2 height=73 class=xl6428029 style='height:54.75pt;border-top:
+  none'>命令号</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数1</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数2</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数3</td>
+  <td colspan=2 class=xl6428029 style='border-left:none'>参数4</td>
+  <td rowspan=2 class=xl6428029 style='border-top:none'>成功返回长度</td>
+  <td rowspan=2 class=xl6428029 style='border-top:none'>说明</td>
+ </tr>
+ <tr height=38 style='mso-height-source:userset;height:28.5pt'>
+  <td height=38 class=xl6428029 style='height:28.5pt;border-top:none;
+  border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>占用长度</td>
+  <td class=xl6428029 style='border-top:none;border-left:none'>说明</td>
+ </tr>
+ <tr height=22 style='mso-height-source:userset;height:16.5pt'>
+  <td height=22 class=xl7128029 width=72 style='height:16.5pt;border-top:none;
+  width:54pt'>0</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>1</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>CPOL,为0时为SPI_POLARITY_LOW</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>1</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>CPHA，为0时为SPI_PHASE_1EDGE</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>1</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>位序，为0时为SPI_FIRSTBIT_MSB</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>设置SPI通信参数</td>
+ </tr>
+ <tr height=38 style='height:28.5pt'>
+  <td height=38 class=xl7128029 width=72 style='height:28.5pt;border-top:none;
+  width:54pt'>1</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>　</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>　</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>　</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>　</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>1+40</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>初始化SPI Flash通信，读写/擦除前必须执行此命令，返回的数据为配置结构体的内容。</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>2</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>　</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>　</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>　</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>　</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>擦除整个SPI Flash芯片，W25qxx_EraseChip</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>3</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>扇区地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>　</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>　</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按扇区擦除SPI Flash芯片,W25qxx_EraseSector</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>4</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>块地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>　</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>　</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按块擦除SPI Flash芯片,W25qxx_EraseBlock</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>5</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>4</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>数量，小端模式</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>检查页是否为空，,W25qxx_IsEmptyPage</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>6</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>4</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>数量，小端模式</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>检查扇区是否为空W25qxx_IsEmptySector</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>7</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>4</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>数量，小端模式</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>检查块是否为空，W25qxx_IsEmptyBlock</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>8</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>1</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>待写入的数据</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>写入1字节数据，W25qxx_WriteByte</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>9</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>至帧结束</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>待写入的数据</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按页写入数据，W25qxx_WritePage</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>10</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>至帧结束</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>待写入的数据</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按扇区写入数据，W25qxx_WriteSector</td>
+ </tr>
+ <tr height=19 style='height:14.25pt'>
+  <td height=19 class=xl7128029 width=72 style='height:14.25pt;border-top:none;
+  width:54pt'>11</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>至帧结束</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>待写入的数据</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>同发送长度</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按块写入数据，W25qxx_WriteBlock</td>
+ </tr>
+ <tr height=38 style='height:28.5pt'>
+  <td height=38 class=xl7128029 width=72 style='height:28.5pt;border-top:none;
+  width:54pt'>12</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>　</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>　</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>5+1</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>读取1字节数据，数据在末尾，W25qxx_ReadByte</td>
+ </tr>
+ <tr height=38 style='height:28.5pt'>
+  <td height=38 class=xl7128029 width=72 style='height:28.5pt;border-top:none;
+  width:54pt'>13</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>数量，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>　</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>9+参数2</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>读取多字节数据，数据在末尾，W26qxx_ReadBytes</td>
+ </tr>
+ <tr height=38 style='height:28.5pt'>
+  <td height=38 class=xl7128029 width=72 style='height:28.5pt;border-top:none;
+  width:54pt'>14</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>4</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>数量，小端模式</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>13+参数3</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按页读多字节数据，数据在末尾，W25qxx_ReadPage</td>
+ </tr>
+ <tr height=38 style='height:28.5pt'>
+  <td height=38 class=xl7128029 width=72 style='height:28.5pt;border-top:none;
+  width:54pt'>15</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>4</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>数量，小端模式</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>13+参数3</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按扇区读多字节数据，数据在末尾，W25qxx_ReadSector</td>
+ </tr>
+ <tr height=38 style='height:28.5pt'>
+  <td height=38 class=xl7128029 width=72 style='height:28.5pt;border-top:none;
+  width:54pt'>16</td>
+  <td class=xl7128029 width=61 style='border-top:none;border-left:none;
+  width:46pt'>4</td>
+  <td class=xl7128029 width=269 style='border-top:none;border-left:none;
+  width:202pt'>地址，小端模式</td>
+  <td class=xl7128029 width=66 style='border-top:none;border-left:none;
+  width:50pt'>4</td>
+  <td class=xl7128029 width=290 style='border-top:none;border-left:none;
+  width:218pt'>偏移，小端模式</td>
+  <td class=xl7128029 width=74 style='border-top:none;border-left:none;
+  width:56pt'>4</td>
+  <td class=xl7128029 width=250 style='border-top:none;border-left:none;
+  width:188pt'>数量，小端模式</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=72 style='border-top:none;border-left:none;
+  width:54pt'>　</td>
+  <td class=xl7128029 width=126 style='border-top:none;border-left:none;
+  width:95pt'>13+参数3</td>
+  <td class=xl7128029 width=311 style='border-top:none;border-left:none;
+  width:233pt'>按块读多字节数据，数据在末尾，W25qxx_ReadBlock</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=72 style='width:54pt'></td>
+  <td width=61 style='width:46pt'></td>
+  <td width=269 style='width:202pt'></td>
+  <td width=66 style='width:50pt'></td>
+  <td width=290 style='width:218pt'></td>
+  <td width=74 style='width:56pt'></td>
+  <td width=250 style='width:188pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=126 style='width:95pt'></td>
+  <td width=311 style='width:233pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+
+
+
+
+## 原始模式I2C
+
+帧格式: I2C器件地址+待发送/接收的的数据，其中器件地址为8位地址(最低位表示读(1)/写(0)),待发送/接收的由帧长度-1的值确定。
+
+>例：当使用I2C操作EEPROM AT24C64时，地址为A1（读）/A0(写)。
+
+>> 进行读操作时，无需发送读取地址，自动从当前地址读帧长度-1个字符。需要改变地址时，需要使用写操作(不写入任何数据)。
+
+>> 进行写操作时，除需要器件地址外，待发送的数据前2字节为写入/读取地址（地址高字节在前），后面才是实际写入的数据（长度为帧长度-3，当写入数据不存在时，仅改变地址）。注意：写入数据时，不会自动跨页，如需跨页，要分为多次写操作。
+
+![原始模式I2C](Mode_I2C_RAW.jpg)
+
+## 命令模式I2C
+
+上位机发送的数据将被解析，第一个字节将会被认为是命令号，硬件通过这个命令号执行不同的函数，出错时，返回的数据的第一个字节为0xff。
+
 <table border=0 cellpadding=0 cellspacing=0 width=1457 class=xl6328029
  style='border-collapse:collapse;table-layout:fixed;width:1094pt'>
  <col class=xl6328029 width=72 style='width:54pt'>
@@ -150,23 +644,6 @@
  <![endif]>
 </table>
 
-
-
-## 原始模式I2C
-
-帧格式: I2C器件地址+待发送/接收的的数据，其中器件地址为8位地址(最低位表示读(1)/写(0)),待发送/接收的由帧长度-1的值确定。
-
->例：当使用I2C操作EEPROM AT24C64时，地址为A1（读）/A0(写)。
-
->> 进行读操作时，无需发送读取地址，自动从当前地址读帧长度-1个字符。需要改变地址时，需要使用写操作(不写入任何数据)。
-
->> 进行写操作时，除需要器件地址外，待发送的数据前2字节为写入/读取地址（地址高字节在前），后面才是实际写入的数据（长度为帧长度-3，当写入数据不存在时，仅改变地址）。注意：写入数据时，不会自动跨页，如需跨页，要分为多次写操作。
-
-![原始模式I2C](Mode_I2C_RAW.jpg)
-
-## 命令模式I2C
-
-上位机发送的数据将被解析，第一个字节将会被认为是命令号，硬件通过这个命令号执行不同的函数，出错时，返回的数据的第一个字节为0xff。
 
 # 硬件部分
 
