@@ -77,7 +77,32 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	{//复位时断开USB连接,再重新连接USB
+		{
+		  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
+		  /* GPIO Ports Clock Enable */
+		  __HAL_RCC_GPIOA_CLK_ENABLE();
+
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
+
+		  /*Configure GPIO pins : PA11 PA12 */
+		  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+		  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+		  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+		  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+		  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
+
+		}
+		{//延时，
+			uint32_t count=48000000/100;
+			while(count--);
+		}
+	}
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
