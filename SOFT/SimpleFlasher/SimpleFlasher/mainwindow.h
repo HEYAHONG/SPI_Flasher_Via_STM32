@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "qhexedit.h"
+#include "readhex.h"
 #include "QMessageBox"
 #include "QMenu"
 #include "QFile"
