@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "qhexedit.h"
+#include "QMessageBox"
+#include "QMenu"
+#include "QFile"
+#include "QFileDialog"
+#include "searchdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +23,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    SearchDialog * searchdialog;
+public slots:
+    void 	menu_triggered(QAction *action);
+    void 	menu_2_triggered(QAction *action);
+    void 	menu_3_triggered(QAction *action);
 };
 #endif // MAINWINDOW_H

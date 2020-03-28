@@ -16,14 +16,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    3rd-party/hex2bin/readhex.c \
+    3rd-party/qhexedit2/src/chunks.cpp \
+    3rd-party/qhexedit2/src/commands.cpp \
+    3rd-party/qhexedit2/src/qhexedit.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    searchdialog.cpp
 
 HEADERS += \
-    mainwindow.h
+    3rd-party/hex2bin/readhex.h \
+    3rd-party/qhexedit2/src/chunks.h \
+    3rd-party/qhexedit2/src/commands.h \
+    3rd-party/qhexedit2/src/qhexedit.h \
+    mainwindow.h \
+    searchdialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    searchdialog.ui
+
+INCLUDEPATH +=\
+   3rd-party/hex2bin/ \
+   3rd-party/qhexedit2/src/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
