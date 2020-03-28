@@ -9,6 +9,8 @@
 #include "QFile"
 #include "QFileDialog"
 #include "searchdialog.h"
+#include "QSerialPort"
+#include "QSerialPortInfo"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,9 +27,14 @@ public:
 private:
     Ui::MainWindow *ui;
     SearchDialog * searchdialog;
+    void UpdateCom();
+    QString serialport;
 public slots:
     void 	menu_triggered(QAction *action);
     void 	menu_2_triggered(QAction *action);
     void 	menu_3_triggered(QAction *action);
+private slots:
+    void on_com_currentIndexChanged(const QString &arg1);
+    void on_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

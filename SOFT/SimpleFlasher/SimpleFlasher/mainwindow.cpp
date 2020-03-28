@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     // 添加搜索框
     searchdialog=new SearchDialog(ui->Edit,this);
 
+    //更新串口号
+    serialport="";
+    UpdateCom();
     //连接信号/槽
     connect(ui->menu,SIGNAL(triggered(QAction *)),this,SLOT(menu_triggered(QAction *)));
     connect(ui->menu_2,SIGNAL(triggered(QAction *)),this,SLOT(menu_2_triggered(QAction *)));
@@ -112,4 +115,40 @@ void 	MainWindow::menu_3_triggered(QAction *action)
 {
     (void)action;//避免警告
     QMessageBox::information(this,"关于","SimpleFlasher by HYH");
+}
+
+
+void MainWindow::UpdateCom()
+{
+        ui->com->clear();
+
+       {//添加串口名
+           foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+           {
+               qDebug()<<"Name:"<<info.portName();
+               qDebug()<<"Description:"<<info.description();
+               qDebug()<<"Manufacturer:"<<info.manufacturer();
+
+               //这里相当于自动识别串口号之后添加到了cmb，如果要手动选择可以用下面列表的方式添加进去
+               QSerialPort serial;
+               serial.setPort(info);
+               if(serial.open(QIODevice::ReadWrite))
+               {
+                   //将串口号添加到cmb
+                   ui->com->addItem(info.portName());
+                   //关闭串口等待人为(打开串口按钮)打开
+                   serial.close();
+               }
+           }
+         }
+}
+
+void MainWindow::on_com_currentIndexChanged(const QString &arg1)
+{
+    serialport=arg1;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    UpdateCom();
 }
