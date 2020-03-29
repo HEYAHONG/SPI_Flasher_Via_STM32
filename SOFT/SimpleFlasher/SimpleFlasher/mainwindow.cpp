@@ -29,6 +29,33 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//hex存储函数
+extern "C"
+{
+static void memory_desc_store_qt(void *arg, int address, uint8_t c)
+{
+    struct memory_desc *mi = (struct memory_desc *)arg;
+
+    //自动使用读取的第一个地址作为偏移地址，要求hex文件中地址从小到大排列
+    static int8_t flag=-1;
+    if(flag==-1)
+    {
+        mi->offset=address;
+        flag=1;
+    }
+
+
+
+    if (address >= mi->offset && address < mi->offset + mi->size) {
+        int offset = address - mi->offset;
+        mi->p[offset] = c;
+        if (offset + 1 > mi->size_written) {
+            mi->size_written = offset + 1;
+        }
+    }
+}
+}
+
 void 	MainWindow::menu_triggered(QAction *action)
 {
 
@@ -51,12 +78,12 @@ void 	MainWindow::menu_triggered(QAction *action)
            uint64_t file_size=file.size();
            uint8_t  buffer[file_size];
            struct memory_desc md;
-           memory_desc_init(&md, buffer,0x0000, file_size);
+           memory_desc_init(&md, buffer,0, file_size);
            {
              FILE * fp=fopen(path.toStdString().c_str(),"r");
              if(fp!=NULL)
              {
-                 if(read_hex(fp, memory_desc_store, &md,1))
+                 if(read_hex(fp, memory_desc_store_qt, &md,1))
                  {
                      static QBuffer qbuffer(this);
                      qbuffer.setData((char *)buffer,md.size_written);
