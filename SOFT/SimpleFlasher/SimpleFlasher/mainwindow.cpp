@@ -62,6 +62,7 @@ void 	MainWindow::menu_triggered(QAction *action)
                      qbuffer.setData((char *)buffer,md.size_written);
                      ui->Edit->setData(qbuffer);
                  }
+                 fclose(fp);
              }
            }
         }

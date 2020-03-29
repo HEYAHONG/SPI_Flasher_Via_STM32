@@ -9,7 +9,7 @@
 * Doc:设计文档及笔记
 * HW:用于验证固件的电路板的设计。
 * FW:固件源代码
-* SOFT:简易上位机源代码（只支持SPI Flash和I2C EEPROM的读取）
+* SOFT:简易上位机源代码（只支持SPI Flash和I2C EEPROM的读写）
 
 
 
