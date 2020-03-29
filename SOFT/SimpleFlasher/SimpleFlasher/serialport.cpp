@@ -7,6 +7,8 @@ SerialPort::SerialPort(QString _serialport)
     IsOpen=false;
 #ifndef WIN32
     fd=-1;
+#else
+    hSerial=NULL;
 #endif
 }
 
@@ -31,7 +33,22 @@ bool SerialPort::open(QString _seriaport)
 
 #ifdef WIN32
 
-#error "暂不支持windows"
+    DWORD  accessdirection =GENERIC_READ | GENERIC_WRITE;
+    hSerial = CreateFileA((char*)serialport.toStdString().c_str(),
+                accessdirection,
+                0,
+                0,
+                OPEN_EXISTING,
+                0,
+                0);
+            if (hSerial == INVALID_HANDLE_VALUE)
+            {
+                IsOpen=false;
+            }
+            else
+            {
+                IsOpen=true;
+            }
 
 #else
 
@@ -50,7 +67,16 @@ bool SerialPort::open(QString _seriaport)
 bool SerialPort::close(bool force)
 {
   #ifdef WIN32
-  #error "暂不支持windows"
+  if(force)
+  {
+    CloseHandle(hSerial);
+    IsOpen=false;
+  }
+  else
+  {
+      CloseHandle(hSerial);
+      IsOpen=false;
+  }
   #else
     if(force)
     {
@@ -72,17 +98,72 @@ bool SerialPort::close(bool force)
     return !IsOpen;
 }
 
+#ifndef WIN32
 struct speed_map
 {
   const char *string;		/* ASCII representation. */
   speed_t speed;		/* Internal form. */
   unsigned long value;		/* Numeric value. */
 };
+#endif
 
 bool SerialPort::setup(int speed, int data_bits, int parity, int stop_bits)
 {
 #ifdef WIN32
-#error "暂时不支持windows"
+    if(!IsOpen)
+        return false;
+    DCB dcbSerialParams = {0};
+    dcbSerialParams.DCBlength=sizeof(dcbSerialParams);
+    if (!GetCommState(hSerial, &dcbSerialParams)) {
+        return false;
+    }
+    dcbSerialParams.BaudRate=speed;
+    dcbSerialParams.ByteSize=data_bits;
+    //dcbSerialParams.StopBits=stopbits;
+    //dcbSerialParams.Parity=parity;
+    /* parity bits */
+    switch (parity)
+    {
+    case 'N':
+    case 'n':
+      dcbSerialParams.Parity=NOPARITY;
+        break;
+    case 'O':
+    case 'o':
+     dcbSerialParams.Parity= ODDPARITY;
+        break;
+    case 'E':
+    case 'e':
+      dcbSerialParams.Parity=EVENPARITY;
+        break;
+    default:
+       return false;
+    }
+
+    /* stop bits */
+    switch (stop_bits)
+    {
+    case 1:
+       dcbSerialParams.StopBits=ONESTOPBIT;
+        break;
+    case 2:
+       dcbSerialParams.StopBits=TWOSTOPBITS;
+        break;
+    default:
+        return false;
+    }
+    if(!SetCommState(hSerial, &dcbSerialParams)){
+         return false;
+    }
+    COMMTIMEOUTS timeouts={0};
+    timeouts.ReadIntervalTimeout=50;
+    timeouts.ReadTotalTimeoutConstant=2000;
+    timeouts.ReadTotalTimeoutMultiplier=10;
+    timeouts.WriteTotalTimeoutConstant=50;
+    timeouts.WriteTotalTimeoutMultiplier=10;
+    if(!SetCommTimeouts(hSerial, &timeouts)){
+        return false;
+    }
 #else
 
     struct speed_map speeds[] =
@@ -280,7 +361,11 @@ int SerialPort::read(uint8_t * buff,size_t length)
 {
   int ret=-1;
 #ifdef WIN32
-#error "暂时不支持windows"
+  DWORD dwBytesRead = 0;
+  if(!ReadFile(hSerial, buff, length, &dwBytesRead, NULL)){
+        return -1;
+     }
+     return dwBytesRead;
 #else
   if(IsOpen)
   {
@@ -297,7 +382,11 @@ int SerialPort::write(uint8_t * buff,size_t length)
 {
   int ret=-1;
 #ifdef WIN32
-#error "暂时不支持windows"
+     DWORD dwBytesRead = 0;
+      if(!WriteFile(hSerial, buff, length, &dwBytesRead, NULL)){
+         return -1;
+      }
+      return dwBytesRead;
 #else
   if(IsOpen)
   {

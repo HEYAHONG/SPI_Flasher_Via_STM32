@@ -12,6 +12,8 @@
 #include <termios.h>
 #include <linux/serial.h>
 #include <sys/ioctl.h>
+#else
+#include <windows.h>
 #endif
 
 class SerialPort
@@ -25,6 +27,8 @@ public:
 
 #ifndef WIN32
     int fd;
+#else
+    HANDLE hSerial;
 #endif
 
     //打开串口

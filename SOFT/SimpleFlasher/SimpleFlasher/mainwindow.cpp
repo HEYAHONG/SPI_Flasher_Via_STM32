@@ -62,7 +62,7 @@ void 	MainWindow::menu_triggered(QAction *action)
     if(action==ui->action)//打开
     {
        static QFile file;
-       QString path=QFileDialog::getOpenFileName(this,"","hex/bin文件 (*.hex | *.bin)");
+       QString path=QFileDialog::getOpenFileName(this,"","");
        if(path.length()==0)
        {
            ui->statusbar->showMessage("打开操作取消！");
