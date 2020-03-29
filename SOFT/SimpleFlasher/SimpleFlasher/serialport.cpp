@@ -72,7 +72,7 @@ bool SerialPort::close(bool force)
     CloseHandle(hSerial);
     IsOpen=false;
   }
-  else
+  else if(IsOpen)
   {
       CloseHandle(hSerial);
       IsOpen=false;
