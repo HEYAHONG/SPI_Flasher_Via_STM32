@@ -22,7 +22,8 @@ SOURCES += \
     3rd-party/qhexedit2/src/qhexedit.cpp \
     main.cpp \
     mainwindow.cpp \
-    searchdialog.cpp
+    searchdialog.cpp \
+    serialport.cpp
 
 HEADERS += \
     3rd-party/hex2bin/readhex.h \
@@ -30,7 +31,8 @@ HEADERS += \
     3rd-party/qhexedit2/src/commands.h \
     3rd-party/qhexedit2/src/qhexedit.h \
     mainwindow.h \
-    searchdialog.h
+    searchdialog.h \
+    serialport.h
 
 FORMS += \
     mainwindow.ui \
