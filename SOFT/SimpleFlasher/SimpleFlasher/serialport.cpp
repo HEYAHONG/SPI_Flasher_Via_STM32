@@ -5,7 +5,9 @@ SerialPort::SerialPort(QString _serialport)
 {
     serialport=_serialport;
     IsOpen=false;
+#ifndef WIN32
     fd=-1;
+#endif
 }
 
 SerialPort::~SerialPort()

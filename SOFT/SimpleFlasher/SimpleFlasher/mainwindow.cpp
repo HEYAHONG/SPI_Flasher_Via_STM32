@@ -321,7 +321,7 @@ void MainWindow::on_pushButton_2_clicked()
             }
             else
             {
-                ui->statusbar->showMessage(QString::number(address,16)+"读取成功\n");
+                ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
                 repaint();
             }
             address+=bytetoread;
@@ -411,7 +411,7 @@ void MainWindow::on_pushButton_2_clicked()
                 }
                 else
                 {
-                    ui->statusbar->showMessage(QString::number(address,16)+"读取成功\n");
+                    ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
                     repaint();
                 }
                 address+=bytetoread;
