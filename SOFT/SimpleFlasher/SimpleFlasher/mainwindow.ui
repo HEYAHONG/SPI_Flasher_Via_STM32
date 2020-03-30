@@ -195,6 +195,22 @@
       <string>擦除Flash</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>131</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>写入Flash</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

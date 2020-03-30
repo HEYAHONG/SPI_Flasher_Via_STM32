@@ -194,6 +194,7 @@ void MainWindow::on_radioButton_spi_toggled(bool checked)
     ui->flash_size->setText("8192");
     ui->pushButton_4->setEnabled(false);
     ui->pushButton_5->setEnabled(true);
+    ui->pushButton_6->setEnabled(true);
    }
 }
 
@@ -204,6 +205,7 @@ void MainWindow::on_radioButton_i2c_toggled(bool checked)
     ui->flash_size->setText("64");
     ui->pushButton_4->setEnabled(true);
     ui->pushButton_5->setEnabled(false);
+    ui->pushButton_6->setEnabled(false);
    }
 }
 
@@ -260,7 +262,7 @@ void MainWindow::on_pushButton_2_clicked()
             write_buff[0]=0x01;
             //填写读缓冲
             read_buff[0]=0xff;
-            if(sp.write(write_buff,64) < 1)
+            if(sp.write(write_buff,1) < 1)
             {
                 ui->statusbar->showMessage("串口读写错误\n");
                 QMessageBox::warning(this,"警告","串口读写错误\n");
@@ -820,6 +822,10 @@ void MainWindow::on_pushButton_4_clicked()
 
     flash_size*=(1024/8);// 转化为字节数
 
+    //调整写入大小
+    if(flash_size>data.length())
+            flash_size=data.length();
+
     //写入数据
     while(address < flash_size)
     {
@@ -956,7 +962,7 @@ void MainWindow::on_pushButton_5_clicked()
             return;
         }
 
-        QThread::sleep(3);
+        QThread::sleep(6);
 
         sp.read(read_buff,3);
         if(read_buff[0]!=write_buff[0])
@@ -974,6 +980,168 @@ void MainWindow::on_pushButton_5_clicked()
         }
     };
 
+
+
+
+    sp.close();
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    if(serialport.length()==0)
+    {
+        ui->statusbar->showMessage("串口设置错误\n");
+        QMessageBox::warning(this,"警告","串口设置错误\n");
+        return;
+    }
+
+    int flash_size=ui->flash_size->text().toInt();
+    if(flash_size<=0 || flash_size >= 8*1024*512)
+    {
+        ui->statusbar->showMessage("大小设置错误\n");
+        QMessageBox::warning(this,"警告","大小设置错误\n");
+        return;
+    }
+
+    SerialPort sp;
+    if(!sp.open(serialport))
+    {
+        ui->statusbar->showMessage("串口打开错误\n");
+        QMessageBox::warning(this,"警告","串口打开错误\n");
+        return;
+    }
+
+    uint8_t write_buff[64]={0},read_buff[64]={0};
+
+    if(!sp.setup(2000000,8,'N',2))
+    {
+        ui->statusbar->showMessage("串口参数设置错误\n");
+        QMessageBox::warning(this,"警告","串口参数错误\n");
+        return;
+    }
+
+    QThread::msleep(50);//等待模式切换完成
+
+    {//初始化SPI Flash通信
+        //填写1号命令
+        write_buff[0]=0x01;
+        //填写读缓冲
+        read_buff[0]=0xff;
+        if(sp.write(write_buff,1) < 1 || sp.read(read_buff,41) < 41)
+        {
+            ui->statusbar->showMessage("串口读写错误\n");
+            QMessageBox::warning(this,"警告","串口读写错误\n");
+            return;
+        }
+        if(read_buff[0]!=write_buff[0])
+        {
+            ui->statusbar->showMessage("SPI Flash未正确安装\n");
+            QMessageBox::warning(this,"警告","SPI Flash未正确安装\n");
+            return;
+        }
+        else
+        {
+            ui->statusbar->showMessage("初始化SPI Flash\n");
+            //通过ID设置flash大小
+            if(read_buff[1]>0)
+            {
+                flash_size=1024*(1<<(read_buff[1]-1));
+                ui->flash_size->setText(QString::number(flash_size));
+            }
+            repaint();
+
+
+        }
+    };
+
+    flash_size*=(1024/8);// 转化为字节数
+
+
+
+    {
+        int pageaddress=0,page_offset=0,bytetowrite=0;
+        QByteArray data=ui->Edit->data();
+        //调整写入大小
+        if(flash_size>data.length())
+                flash_size=data.length();
+
+        while(pageaddress*256+page_offset < flash_size)
+        {
+           //调整写入大小
+           if(flash_size-(pageaddress*256+page_offset) < 32 )
+           {
+               bytetowrite=flash_size-(pageaddress*256+page_offset);
+           }
+           else
+           {
+               bytetowrite=32;
+           }
+           //不可跨页
+           if(page_offset+bytetowrite > 256)
+           {
+               bytetowrite=256-page_offset;
+           }
+
+           {//按页写命令
+               write_buff[0]=9;
+               write_buff[1]=(pageaddress)&0xff;
+               write_buff[2]=(pageaddress>>8)&0xff;
+               write_buff[3]=(pageaddress>>16)&0xff;
+               write_buff[4]=(pageaddress>>24)&0xff;
+               write_buff[5]=(page_offset)&0xff;
+               write_buff[6]=(page_offset>>8)&0xff;
+               write_buff[7]=(page_offset>>16)&0xff;
+               write_buff[8]=(page_offset>>24)&0xff;
+               memcpy(&write_buff[9],&data.toStdString().c_str()[pageaddress*256+page_offset],bytetowrite);
+
+               read_buff[0]=0xff;
+               if(sp.write(write_buff,9+bytetowrite) < 9+bytetowrite || sp.read(read_buff,9+bytetowrite) < 9+bytetowrite)
+               {
+                   ui->statusbar->showMessage("串口读写错误\n");
+                   QMessageBox::warning(this,"警告","串口读写错误\n");
+                   return;
+               }
+               if(read_buff[0]!=write_buff[0])
+               {
+                   ui->statusbar->showMessage("写入失败\n");
+                   QMessageBox::warning(this,"警告","写入失败\n");
+                   return;
+               }
+               else
+               {
+                   double tmp=(double)(pageaddress*256+page_offset+bytetowrite)/flash_size;
+                   ui->statusbar->showMessage(QString::number(tmp*100,'g',4)+"%已读取\n");
+                   //ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
+                   {
+                    static double last_tmp=0;
+                    if(tmp-last_tmp>0.001)
+                       {
+                        repaint();
+                        last_tmp=tmp;
+                       }
+                    if(last_tmp>=0.9999)
+                    {
+                        last_tmp=0;
+                    }
+                   }
+               }
+
+           }
+
+           //增加地址
+           if(page_offset+bytetowrite > 256)
+           {
+               pageaddress+=1;
+               page_offset=0;
+           }
+           else
+           {
+               page_offset+=bytetowrite;
+           }
+
+        }
+
+    }
 
 
 

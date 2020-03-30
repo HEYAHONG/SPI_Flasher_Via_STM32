@@ -49,9 +49,10 @@ bool SerialPort::open(QString _seriaport)
             {
                 IsOpen=true;
             }
-    //清空缓冲区
+         //清空缓冲区
           if(IsOpen)
               PurgeComm(hSerial,PURGE_TXABORT |PURGE_RXABORT |PURGE_TXCLEAR|PURGE_RXCLEAR);
+          SetupComm(hSerial,1024,1024);
 
 #else
 
@@ -364,6 +365,9 @@ int SerialPort::read(uint8_t * buff,size_t length)
 {
   int ret=-1;
 #ifdef WIN32
+  if(!IsOpen)
+      return -1;
+   PurgeComm(hSerial,PURGE_TXABORT |PURGE_RXABORT |PURGE_TXCLEAR|PURGE_RXCLEAR);
   DWORD dwBytesRead = 0;
   if(!ReadFile(hSerial, buff, length, &dwBytesRead, NULL)){
         return -1;
@@ -385,6 +389,9 @@ int SerialPort::write(uint8_t * buff,size_t length)
 {
   int ret=-1;
 #ifdef WIN32
+  if(!IsOpen)
+      return -1;
+   PurgeComm(hSerial,PURGE_TXABORT |PURGE_RXABORT |PURGE_TXCLEAR|PURGE_RXCLEAR);
      DWORD dwBytesRead = 0;
       if(!WriteFile(hSerial, buff, length, &dwBytesRead, NULL)){
          return -1;
