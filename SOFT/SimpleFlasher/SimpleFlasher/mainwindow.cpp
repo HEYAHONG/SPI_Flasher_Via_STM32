@@ -192,6 +192,7 @@ void MainWindow::on_radioButton_spi_toggled(bool checked)
    if(checked)
    {
     ui->flash_size->setText("8192");
+    ui->pushButton_4->setEnabled(false);
    }
 }
 
@@ -200,6 +201,7 @@ void MainWindow::on_radioButton_i2c_toggled(bool checked)
    if(checked)
    {
     ui->flash_size->setText("64");
+    ui->pushButton_4->setEnabled(true);
    }
 }
 
@@ -256,10 +258,18 @@ void MainWindow::on_pushButton_2_clicked()
             write_buff[0]=0x01;
             //填写读缓冲
             read_buff[0]=0xff;
-            if(sp.write(write_buff,1) < 1 || sp.read(read_buff,41) < 2)
+            if(sp.write(write_buff,1) < 1)
             {
                 ui->statusbar->showMessage("串口读写错误\n");
                 QMessageBox::warning(this,"警告","串口读写错误\n");
+                qDebug()<<"错误代码:"<<GetLastError();
+                return;
+            }
+            if(sp.read(read_buff,41) < 41)
+            {
+                ui->statusbar->showMessage("串口读写错误\n");
+                QMessageBox::warning(this,"警告","串口读写错误\n");
+                qDebug()<<"错误代码:"<<GetLastError();
                 return;
             }
             if(read_buff[0]!=write_buff[0])
@@ -549,7 +559,7 @@ void MainWindow::on_pushButton_3_clicked()
             write_buff[0]=0x01;
             //填写读缓冲
             read_buff[0]=0xff;
-            if(sp.write(write_buff,1) < 1 || sp.read(read_buff,41) < 2)
+            if(sp.write(write_buff,1) < 1 || sp.read(read_buff,41) < 41)
             {
                 ui->statusbar->showMessage("串口读写错误\n");
                 QMessageBox::warning(this,"警告","串口读写错误\n");
