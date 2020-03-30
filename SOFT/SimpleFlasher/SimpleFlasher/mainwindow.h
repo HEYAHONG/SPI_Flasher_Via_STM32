@@ -30,6 +30,7 @@ private:
     SearchDialog * searchdialog;
     void UpdateCom();
     QString serialport;
+    void CheckData(QByteArray data);
 public slots:
     void 	menu_triggered(QAction *action);
     void 	menu_2_triggered(QAction *action);
@@ -41,5 +42,6 @@ private slots:
     void on_radioButton_i2c_toggled(bool checked);
     void on_flash_size_textChanged(const QString &arg1);
     void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
 };
 #endif // MAINWINDOW_H
