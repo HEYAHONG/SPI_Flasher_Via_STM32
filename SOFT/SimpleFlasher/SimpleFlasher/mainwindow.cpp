@@ -962,7 +962,7 @@ void MainWindow::on_pushButton_5_clicked()
             return;
         }
 
-        QThread::sleep(6);
+        QThread::sleep(3);
 
         sp.read(read_buff,3);
         if(read_buff[0]!=write_buff[0])
@@ -1110,8 +1110,7 @@ void MainWindow::on_pushButton_6_clicked()
                else
                {
                    double tmp=(double)(pageaddress*256+page_offset+bytetowrite)/flash_size;
-                   ui->statusbar->showMessage(QString::number(tmp*100,'g',4)+"%已读取\n");
-                   //ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
+                   ui->statusbar->showMessage(QString::number(tmp*100,'g',4)+"%已写入\n");
                    {
                     static double last_tmp=0;
                     if(tmp-last_tmp>0.001)
@@ -1129,7 +1128,7 @@ void MainWindow::on_pushButton_6_clicked()
            }
 
            //增加地址
-           if(page_offset+bytetowrite > 256)
+           if(page_offset+bytetowrite >= 256)
            {
                pageaddress+=1;
                page_offset=0;
