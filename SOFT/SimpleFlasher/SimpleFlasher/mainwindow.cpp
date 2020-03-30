@@ -323,8 +323,21 @@ void MainWindow::on_pushButton_2_clicked()
             }
             else
             {
-                ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
-                repaint();
+                double tmp=(double)(address+bytetoread)/flash_size;
+                ui->statusbar->showMessage(QString::number(tmp*100)+"%已读取\n");
+                //ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
+                {
+                 static double last_tmp=0;
+                 if(tmp-last_tmp>0.001)
+                    {
+                     repaint();
+                     last_tmp=tmp;
+                    }
+                 if(last_tmp>=1)
+                 {
+                     last_tmp=0;
+                 }
+                }
             }
             address+=bytetoread;
             data+=QByteArray((char *)&read_buff[9],bytetoread);
@@ -413,8 +426,21 @@ void MainWindow::on_pushButton_2_clicked()
                 }
                 else
                 {
-                    ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
-                    repaint();
+                    double tmp=(double)(address+bytetoread)/flash_size;
+                    ui->statusbar->showMessage(QString::number(tmp*100,'g',4)+"%已读取\n");
+                    //ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
+                    {
+                     static double last_tmp=0;
+                     if(tmp-last_tmp>0.001)
+                        {
+                         repaint();
+                         last_tmp=tmp;
+                        }
+                     if(last_tmp>=1)
+                     {
+                         last_tmp=0;
+                     }
+                    }
                 }
                 address+=bytetoread;
                 data+=QByteArray((char *)&read_buff[1],bytetoread);
