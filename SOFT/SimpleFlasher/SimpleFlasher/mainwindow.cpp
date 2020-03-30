@@ -177,6 +177,8 @@ void MainWindow::on_com_currentIndexChanged(const QString &arg1)
     serialport=arg1;
 #ifndef WIN32
     serialport=QString("/dev/")+arg1;
+#else
+    serialport=QString("\\\\.\\")+arg1;
 #endif
 }
 
