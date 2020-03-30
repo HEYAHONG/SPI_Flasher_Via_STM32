@@ -49,6 +49,9 @@ bool SerialPort::open(QString _seriaport)
             {
                 IsOpen=true;
             }
+    //清空缓冲区
+          if(IsOpen)
+              PurgeComm(hSerial,PURGE_TXABORT |PURGE_RXABORT |PURGE_TXCLEAR|PURGE_RXCLEAR);
 
 #else
 
@@ -158,7 +161,7 @@ bool SerialPort::setup(int speed, int data_bits, int parity, int stop_bits)
     COMMTIMEOUTS timeouts={0};
     timeouts.ReadIntervalTimeout=50;
     timeouts.ReadTotalTimeoutConstant=2000;
-    timeouts.ReadTotalTimeoutMultiplier=10;
+    timeouts.ReadTotalTimeoutMultiplier=100;
     timeouts.WriteTotalTimeoutConstant=50;
     timeouts.WriteTotalTimeoutMultiplier=10;
     if(!SetCommTimeouts(hSerial, &timeouts)){

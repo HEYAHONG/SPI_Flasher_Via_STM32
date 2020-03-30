@@ -256,7 +256,7 @@ void MainWindow::on_pushButton_2_clicked()
             write_buff[0]=0x01;
             //填写读缓冲
             read_buff[0]=0xff;
-            if(sp.write(write_buff,1) < 1 || sp.read(read_buff,41) < 41)
+            if(sp.write(write_buff,1) < 1 || sp.read(read_buff,41) < 2)
             {
                 ui->statusbar->showMessage("串口读写错误\n");
                 QMessageBox::warning(this,"警告","串口读写错误\n");
@@ -324,7 +324,7 @@ void MainWindow::on_pushButton_2_clicked()
             else
             {
                 double tmp=(double)(address+bytetoread)/flash_size;
-                ui->statusbar->showMessage(QString::number(tmp*100)+"%已读取\n");
+                ui->statusbar->showMessage(QString::number(tmp*100,'g',4)+"%已读取\n");
                 //ui->statusbar->showMessage(QString::number(address,16)+"读取"+QString::number(bytetoread)+"字节成功\n");
                 {
                  static double last_tmp=0;
@@ -333,7 +333,7 @@ void MainWindow::on_pushButton_2_clicked()
                      repaint();
                      last_tmp=tmp;
                     }
-                 if(last_tmp>=1)
+                 if(last_tmp>=0.9999)
                  {
                      last_tmp=0;
                  }
@@ -436,7 +436,7 @@ void MainWindow::on_pushButton_2_clicked()
                          repaint();
                          last_tmp=tmp;
                         }
-                     if(last_tmp>=1)
+                     if(last_tmp>=0.9999)
                      {
                          last_tmp=0;
                      }
