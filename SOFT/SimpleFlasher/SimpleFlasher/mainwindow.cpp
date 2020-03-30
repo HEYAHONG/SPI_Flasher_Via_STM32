@@ -753,3 +753,125 @@ void MainWindow::on_pushButton_3_clicked()
 
     sp.close(true);
 }
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    if(serialport.length()==0)
+    {
+        ui->statusbar->showMessage("串口设置错误\n");
+        QMessageBox::warning(this,"警告","串口设置错误\n");
+        return;
+    }
+
+    int flash_size=ui->flash_size->text().toInt();
+    if(flash_size<=0 || flash_size >= 8*1024*512)
+    {
+        ui->statusbar->showMessage("大小设置错误\n");
+        QMessageBox::warning(this,"警告","大小设置错误\n");
+        return;
+    }
+
+    SerialPort sp;
+    if(!sp.open(serialport))
+    {
+        ui->statusbar->showMessage("串口打开错误\n");
+        QMessageBox::warning(this,"警告","串口打开错误\n");
+        return;
+    }
+
+    uint8_t write_buff[64]={0},read_buff[64]={0};
+
+    if(!sp.setup(1500000,8,'N',2))
+    {
+        ui->statusbar->showMessage("串口参数设置错误\n");
+        QMessageBox::warning(this,"警告","串口参数错误\n");
+        return;
+    }
+
+    QThread::msleep(50);//等待模式切换完成
+
+    int address=0; QByteArray data=ui->Edit->data();
+
+    {//设置EEPROM大小
+        //填写1号命令
+        write_buff[0]=0x01;
+        write_buff[1]=(flash_size & 0xff);
+        write_buff[2]=((flash_size & 0xff00)>>8);
+        //填写读缓冲
+        read_buff[0]=0xff;
+        if(sp.write(write_buff,3) < 3 || sp.read(read_buff,3) < 3)
+        {
+            ui->statusbar->showMessage("串口读写错误\n");
+            QMessageBox::warning(this,"警告","串口读写错误\n");
+            return;
+        }
+        if(read_buff[0]!=write_buff[0])
+        {
+            ui->statusbar->showMessage("EEPROM未正确安装\n");
+            QMessageBox::warning(this,"警告","EEPROM未正确安装\n");
+            return;
+        }
+        else
+        {
+            ui->statusbar->showMessage("设置EEPROM大小\n");
+            repaint();
+        }
+    };
+
+    flash_size*=(1024/8);// 转化为字节数
+
+    //写入数据
+    while(address < flash_size)
+    {
+        int bytetowrite=0;
+        if((flash_size-address)<32)
+        {
+            bytetowrite=flash_size-address;
+        }
+        else
+        {
+           bytetowrite=32;
+        }
+
+        write_buff[0]=0x03;
+        write_buff[1]=(address&0xff);
+        write_buff[2]=(address>>8);
+        memcpy(&write_buff[3],&data.toStdString().c_str()[address],bytetowrite);
+
+        read_buff[0]=0xff;
+        if(sp.write(write_buff,3+bytetowrite) < 3+bytetowrite || sp.read(read_buff,3+bytetowrite) < 3+bytetowrite)
+        {
+            ui->statusbar->showMessage("串口读写错误\n");
+            QMessageBox::warning(this,"警告","串口读写错误\n");
+            return;
+        }
+        if(read_buff[0]!=write_buff[0])
+        {
+            ui->statusbar->showMessage("写入失败\n");
+            QMessageBox::warning(this,"警告","写入失败\n");
+            return;
+        }
+        else
+        {
+            double tmp=(double)(address+bytetowrite)/flash_size;
+            ui->statusbar->showMessage(QString::number(tmp*100,'g',4)+"%已写入\n");
+            {
+             static double last_tmp=0;
+             if(tmp-last_tmp>0.001)
+                {
+                 repaint();
+                 last_tmp=tmp;
+                }
+             if(last_tmp>=0.9999)
+                {
+                 last_tmp=0;
+                }
+                }
+         }
+
+        address+=bytetowrite;
+    }
+
+
+    sp.close();
+}

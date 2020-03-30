@@ -368,7 +368,7 @@ int SerialPort::read(uint8_t * buff,size_t length)
   if(!ReadFile(hSerial, buff, length, &dwBytesRead, NULL)){
         return -1;
      }
-     return dwBytesRead;
+     return (int)dwBytesRead;
 #else
   if(IsOpen)
   {
@@ -389,7 +389,7 @@ int SerialPort::write(uint8_t * buff,size_t length)
       if(!WriteFile(hSerial, buff, length, &dwBytesRead, NULL)){
          return -1;
       }
-      return dwBytesRead;
+      return (int)dwBytesRead;
 #else
   if(IsOpen)
   {
