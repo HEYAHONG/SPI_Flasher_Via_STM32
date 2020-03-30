@@ -367,7 +367,7 @@ int SerialPort::read(uint8_t * buff,size_t length)
 #ifdef WIN32
   if(!IsOpen)
       return -1;
-   PurgeComm(hSerial,PURGE_TXABORT |PURGE_RXABORT |PURGE_TXCLEAR|PURGE_RXCLEAR);
+   PurgeComm(hSerial,PURGE_TXABORT | PURGE_TXCLEAR);
   DWORD dwBytesRead = 0;
   if(!ReadFile(hSerial, buff, length, &dwBytesRead, NULL)){
         return -1;
@@ -391,7 +391,7 @@ int SerialPort::write(uint8_t * buff,size_t length)
 #ifdef WIN32
   if(!IsOpen)
       return -1;
-   PurgeComm(hSerial,PURGE_TXABORT |PURGE_RXABORT |PURGE_TXCLEAR|PURGE_RXCLEAR);
+   PurgeComm(hSerial,PURGE_RXABORT |PURGE_RXCLEAR);
      DWORD dwBytesRead = 0;
       if(!WriteFile(hSerial, buff, length, &dwBytesRead, NULL)){
          return -1;
