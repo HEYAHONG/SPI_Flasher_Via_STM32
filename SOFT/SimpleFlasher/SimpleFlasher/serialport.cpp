@@ -156,6 +156,18 @@ bool SerialPort::setup(int speed, int data_bits, int parity, int stop_bits)
     default:
         return false;
     }
+
+    //串口参数设置
+    dcbSerialParams.fOutxCtsFlow=FALSE;
+    dcbSerialParams.fOutxDsrFlow=FALSE;
+    dcbSerialParams.fInX=FALSE;
+    dcbSerialParams.fOutX=FALSE;
+    dcbSerialParams.fTXContinueOnXoff=TRUE;
+    dcbSerialParams.fBinary=TRUE;
+    dcbSerialParams.fErrorChar=FALSE;
+    dcbSerialParams.fAbortOnError=FALSE;
+    dcbSerialParams.fNull=FALSE;
+
     if(!SetCommState(hSerial, &dcbSerialParams)){
          return false;
     }
