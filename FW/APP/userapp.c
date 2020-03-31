@@ -23,7 +23,7 @@ void loop_user_call()//在Main函数里循环调用此函数
 {
 	if(linecode.IsUpdate)
 	{
-		HAL_Delay(20);//延时20ms设置通信参数
+		HAL_Delay(5);//延时5ms设置通信参数
 		if(linecode.Rate<1500000)//速率小于1.5Mbps，为串口模式(极其有限的串口支持)
 		{//重新初始化串口
 			WorkMode=Mode_UART;

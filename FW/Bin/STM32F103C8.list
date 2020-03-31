@@ -4226,8 +4226,8 @@ void loop_user_call()//在Main函数里循环调用此函数
  8001f98:	2b00      	cmp	r3, #0
  8001f9a:	f000 809a 	beq.w	80020d2 <loop_user_call+0x142>
 	{
-		HAL_Delay(20);//延时20ms设置通信参数
- 8001f9e:	2014      	movs	r0, #20
+		HAL_Delay(5);//延时5ms设置通信参数
+ 8001f9e:	2005      	movs	r0, #5
  8001fa0:	f001 fac0 	bl	8003524 <HAL_Delay>
 		if(linecode.Rate<1500000)//速率小于1.5Mbps，为串口模式(极其有限的串口支持)
  8001fa4:	4b52      	ldr	r3, [pc, #328]	; (80020f0 <loop_user_call+0x160>)
