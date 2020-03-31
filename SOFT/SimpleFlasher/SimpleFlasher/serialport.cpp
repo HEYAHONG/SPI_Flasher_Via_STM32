@@ -176,8 +176,8 @@ bool SerialPort::setup(int speed, int data_bits, int parity, int stop_bits)
     timeouts.ReadIntervalTimeout=50;
     timeouts.ReadTotalTimeoutConstant=2000;
     timeouts.ReadTotalTimeoutMultiplier=100;
-    timeouts.WriteTotalTimeoutConstant=50;
-    timeouts.WriteTotalTimeoutMultiplier=10;
+    timeouts.WriteTotalTimeoutConstant=0;
+    timeouts.WriteTotalTimeoutMultiplier=0;
     if(!SetCommTimeouts(hSerial, &timeouts)){
         return false;
     }
