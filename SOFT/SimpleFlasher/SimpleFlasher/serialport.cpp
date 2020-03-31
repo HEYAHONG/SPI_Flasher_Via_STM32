@@ -162,11 +162,12 @@ bool SerialPort::setup(int speed, int data_bits, int parity, int stop_bits)
     dcbSerialParams.fOutxDsrFlow=FALSE;
     dcbSerialParams.fInX=FALSE;
     dcbSerialParams.fOutX=FALSE;
-    dcbSerialParams.fTXContinueOnXoff=TRUE;
+    dcbSerialParams.fTXContinueOnXoff=FALSE;
     dcbSerialParams.fBinary=TRUE;
     dcbSerialParams.fErrorChar=FALSE;
     dcbSerialParams.fAbortOnError=FALSE;
     dcbSerialParams.fNull=FALSE;
+    dcbSerialParams.fParity=FALSE;
 
     if(!SetCommState(hSerial, &dcbSerialParams)){
          return false;
