@@ -665,3 +665,13 @@
 
 
 注意:芯片安装时，1脚的位置要正确，否则可能烧坏芯片（接反时，芯片电源和地会对调）
+
+# 上位机软件
+
+上位机软件主要是用于EEPROM和Flash的烧录，一般只使用命令模式SPI和命令模式I2C。除此之外，其它模式基本上只是用于调试，只需要使用串口调试助手。
+
+>> 例：24C64 EEPROM的烧写
+>> ![烧写I2C_EEPROM](Simpleflasher_eeprom.gif)
+
+>>例：w25q80 flash的烧写（部分操作耗时较长，进行了快进）
+>> ![烧写SPI_Flash](Simpleflasher_flash.gif)
