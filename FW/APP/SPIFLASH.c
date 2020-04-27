@@ -37,12 +37,13 @@ spiflash_bin_write,
 
 void spiflash_bin_register(void)
 {
-	W25qxx_Init();
+	VirtualFat_Unregister_RootFile(&spiflash);
+	if(!W25qxx_Init())
+		return;//未连接spiflash
 	if(w25qxx.CapacityInKiloByte!=0)
 	{
 		spiflash.size=w25qxx.CapacityInKiloByte*1024;
 	}
-	VirtualFat_Unregister_RootFile(&spiflash);
 	VirtualFat_Register_RootFile(&spiflash);
 
 }
