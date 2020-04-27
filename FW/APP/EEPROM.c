@@ -6,6 +6,7 @@
  */
 #include "EEPROM.h"
 #include "eeprom24xx.h"
+#include "main.h"
 
 static void eeprom_bin_read(uint8_t *buf,size_t offset,size_t length)
 {
@@ -31,8 +32,32 @@ eeprom_bin_write,
 
 extern size_t _EEPROM_SIZE_KBIT;//容量设置
 
+void eeprom_bin_setsize(uint32_t size)
+{
+	if(size==0)
+	{
+		_EEPROM_SIZE_KBIT=64;
+		return;
+	}
+
+
+	uint16_t size_1=0x01;
+	for(size_t i=0;i<16;i++)
+	{
+		if(size_1&size)
+		{
+			_EEPROM_SIZE_KBIT=size_1;
+		}
+		size_1 <<=1;
+	}
+
+	eeprom_bin_register();
+
+}
+
 void eeprom_bin_register(void)
 {
+
 	VirtualFat_Unregister_RootFile(&eeprom);
 	if(!EEPROM24XX_IsConnected()) return;//未连接eeprom
 	sprintf(eeprom.FileName,"24X%02d",_EEPROM_SIZE_KBIT);

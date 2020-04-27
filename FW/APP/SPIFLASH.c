@@ -18,7 +18,7 @@ static void spiflash_bin_write(uint8_t *buf,size_t offset,size_t length)
 	//W25qxx_Init();
 	//此处未进行擦除操作
 	W25qxx_WritePage(buf,offset/w25qxx.PageSize,0,w25qxx.PageSize);
-	W25qxx_WritePage(buf,offset/w25qxx.PageSize+1,0,w25qxx.PageSize);
+	W25qxx_WritePage(buf+w25qxx.PageSize,offset/w25qxx.PageSize+1,0,w25qxx.PageSize);
 
 }
 

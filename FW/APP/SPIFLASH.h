@@ -9,6 +9,7 @@
 #define SPIFLASH_H_
 #include "VirtualFat.h"
 #include "main.h"
+#include "w25qxx.h"
 
 void spiflash_bin_register();
 

@@ -9,6 +9,14 @@
 
 采用[VirtualFat](https://github.com/HEYAHONG/STM32_VirtualFat.git),虚拟一个U盘，将SPI Flash和I2C EEPROM像普通文件一样读。当硬件连接正确且上位机正确识别U盘后，在U盘中会出现24XXX.bin与25XXX.bin,对这些文件的操作会映射到SPI Flash与I2C EEPROM上。
 
+## 命令
+
+由于读写SPI Flash和I2C EEPROM还需要一些额外的操作，如：EEPROM的设置容量，Flash的擦除操作。因此，还需要单独一个文件(FSINFO.TXT)用于执行这些命令。写入这个文件的操作会被解析并执行。当前支持的命令有：
+
+* RESET 重启单片机
+* FE    擦除Flash(Flash ERASE)
+* E###  设置EEPROM容量为###Kbits（###为10进制数）
+
 ## 支持的操作系统
 
 * windows

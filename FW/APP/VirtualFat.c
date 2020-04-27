@@ -8,6 +8,9 @@
 #include "RC.H"
 #include "EEPROM.h"
 #include "SPIFLASH.h"
+#include "main.h"
+
+
 //fat文件系统各部分起始扇区地址
 
 static uint32_t FAT1_START=4;//FAT表
@@ -39,8 +42,9 @@ ErrorLevel:%d\r\n\
 命令使用方式:\r\n\
     在cmd控制台中进入虚拟优盘目录并键入: echo 命令  > FSINFO.TXT\r\n\
 当前可用的命令:\r\n\
-RESET\t重启单片机\n\r\
-		","FAT16","何亚红",errorlevel);
+RESET\t重启单片机\n\
+FE\t擦除Flash\n	\
+E###  设置EEPROM容量为### Kbits（###为10进制数）","FAT16","何亚红",errorlevel);
 	{//用空格填充文本，防止在某些文本编辑器上出现异常
 		for(size_t i=0;i<length;i++)
 		{
@@ -82,6 +86,31 @@ static void fsinfo_txt_write(uint8_t *buf,size_t offset,size_t length)
 #endif
 			}
 		}
+
+		if(fsinfo_cmd_compare(buf,(uint8_t *)"FE"))
+		{
+			if(W25qxx_Init())
+			{
+				errorlevel=0;
+				W25qxx_EraseChip();
+				//STM32F103复位函数
+				#if __CORTEX_M==3
+				NVIC_SystemReset();
+				#endif
+
+			}
+		}
+
+		if(buf[0]=='E')
+		{
+			char size_buff[4]={};
+			int size=0;
+			memcpy(size_buff,&buf[1],3);
+			sscanf(size_buff,"%d",&size);
+			eeprom_bin_setsize(size);
+
+		}
+
 	}
 }
 
