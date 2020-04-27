@@ -9,6 +9,7 @@
 #define W25QXX_DUMMY_BYTE         0xA5
 
 w25qxx_t	w25qxx;
+/*
 
 #if (_W25QXX_USE_FREERTOS==1)
 #define	W25qxx_Delay(delay)		osDelay(delay)
@@ -16,6 +17,15 @@ w25qxx_t	w25qxx;
 #else
 #define	W25qxx_Delay(delay)		HAL_Delay(delay)
 #endif
+*/
+
+//使用死循环延时
+static void W25qxx_Delay(uint16_t i)
+{
+	size_t count=i*480;//48M时钟
+	while(count--);
+}
+
 //###################################################################################################################
 uint8_t	W25qxx_Spi(uint8_t	Data)
 {
