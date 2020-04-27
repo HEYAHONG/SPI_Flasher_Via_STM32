@@ -43,7 +43,7 @@ ErrorLevel:%d\r\n\
     在cmd控制台中进入虚拟优盘目录并键入: echo 命令  > FSINFO.TXT\r\n\
 当前可用的命令:\r\n\
 RESET\t重启单片机\n\
-FE\t擦除Flash\n	\
+FE\t擦除Flash\n\
 E###  设置EEPROM容量为### Kbits（###为10进制数）","FAT16","何亚红",errorlevel);
 	{//用空格填充文本，防止在某些文本编辑器上出现异常
 		for(size_t i=0;i<length;i++)
