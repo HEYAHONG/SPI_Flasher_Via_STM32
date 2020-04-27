@@ -6,7 +6,8 @@
  */
 #include "VirtualFat.h"
 #include "RC.H"
-
+#include "EEPROM.h"
+#include "SPIFLASH.h"
 //fat文件系统各部分起始扇区地址
 
 static uint32_t FAT1_START=4;//FAT表
@@ -106,6 +107,14 @@ static void init_fatfs(FAT_BPB *bpb)
 	VirtualFat_Unregister_RootFile(&fsinfo);
 	VirtualFat_Register_RootFile(&fsinfo);
 #endif
+
+#ifdef EEPROM_H_
+	eeprom_bin_register();
+#endif
+
+#ifdef SPIFLASH_H_
+	spiflash_bin_register();
+#endif
 }
 
 //处理FAT表
@@ -139,14 +148,14 @@ static void read_fat_fatfs(uint32_t fat_offset,uint8_t *buf)
 				for(file_current=0;file_current<file_size;file_current++)
 				{
 
-					if(file_start>=fat_start_index)//文件的FAT在当前扇区有数据
+					if(file_start+file_current>=fat_start_index)//文件的FAT在当前扇区有数据
 					{
 						if((file_start+file_current-fat_start_index)<512/2)//文件数据未超出当前扇区
 						{
 							if(file_current!=file_size-1)//是否为文件结束
 							{//指向下一簇
-								buf[(file_start+file_current-fat_start_index)*2]=(file_start+1)&0xff;
-								buf[(file_start+file_current-fat_start_index)*2+1]=((file_start+1)&0xff00)>>8;
+								buf[(file_start+file_current-fat_start_index)*2]=(file_start+file_current+1)&0xff;
+								buf[(file_start+file_current-fat_start_index)*2+1]=((file_start+file_current+1)&0xff00)>>8;
 							}
 							else
 							{//文件结束
