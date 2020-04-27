@@ -35,7 +35,7 @@ void eeprom_bin_register(void)
 {
 	VirtualFat_Unregister_RootFile(&eeprom);
 	if(!EEPROM24XX_IsConnected()) return;//未连接eeprom
-	sprintf(eeprom.FileName,"24X%d",_EEPROM_SIZE_KBIT);
+	sprintf(eeprom.FileName,"24X%02d",_EEPROM_SIZE_KBIT);
 	eeprom.size=_EEPROM_SIZE_KBIT*1024/8;
 	VirtualFat_Register_RootFile(&eeprom);
 
