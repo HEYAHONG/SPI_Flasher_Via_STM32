@@ -51,12 +51,31 @@ void eeprom_bin_setsize(uint32_t size)
 		size_1 <<=1;
 	}
 
+
+
+	{//写后备寄存器
+			RCC->APB1ENR |= (1 << 27 | 1 << 28); 	// 电源接口时钟/备份时钟开启
+			PWR->CR |= 1 << 8;	// 允许写入后备寄存器
+
+			BKP->DR1=_EEPROM_SIZE_KBIT;
+	}
+
 	eeprom_bin_register();
 
 }
 
 void eeprom_bin_register(void)
 {
+
+	{
+		RCC->APB1ENR |= (1 << 27 | 1 << 28); 	// 电源接口时钟/备份时钟开启
+		PWR->CR |= 1 << 8;	// 允许写入后备寄存器
+
+		if(BKP->DR1!=0)//使用BKP->DR1保存EEPROM大小
+		{
+			_EEPROM_SIZE_KBIT=BKP->DR1;
+		}
+	}
 
 	VirtualFat_Unregister_RootFile(&eeprom);
 	if(!EEPROM24XX_IsConnected()) return;//未连接eeprom

@@ -108,7 +108,9 @@ static void fsinfo_txt_write(uint8_t *buf,size_t offset,size_t length)
 			memcpy(size_buff,&buf[1],3);
 			sscanf(size_buff,"%d",&size);
 			eeprom_bin_setsize(size);
-
+				#if __CORTEX_M==3
+				NVIC_SystemReset();
+				#endif
 		}
 
 	}
