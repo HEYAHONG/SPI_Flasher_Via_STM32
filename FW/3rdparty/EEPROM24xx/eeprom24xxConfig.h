@@ -1,6 +1,8 @@
 #ifndef	_24XXCONFIG_H
 #define	_24XXCONFIG_H
 #include "stdint.h"
+#include "main.h"
+extern I2C_HandleTypeDef hi2c1;
 
 //#define		_EEPROM_SIZE_KBIT										32
 extern  size_t _EEPROM_SIZE_KBIT;

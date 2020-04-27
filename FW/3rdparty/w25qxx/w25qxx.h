@@ -24,7 +24,7 @@
 #endif
 
 #include <stdbool.h>
-#include "userapp.h"
+#include "main.h"
 
 typedef enum
 {

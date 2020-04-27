@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "userapp.h"
+#include "VirtualFat.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -77,7 +77,7 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	{//复位时断开USB连接,再重新连接USB
+	{//复位时断�?USB连接,再重新连接USB
 		{
 		  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -98,7 +98,7 @@ int main(void)
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
 
 		}
-		{//延时，
+		{//延时�?
 			uint32_t count=48000000/100;
 			while(count--);
 		}
@@ -129,7 +129,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  init_user_call();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -139,7 +139,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  loop_user_call();
+
   }
   /* USER CODE END 3 */
 }
