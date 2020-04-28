@@ -22,7 +22,7 @@ w25qxx_t	w25qxx;
 //使用死循环延时
 static void W25qxx_Delay(uint16_t i)
 {
-	size_t count=i*480;//48M时钟
+	size_t count=i*48;//48M时钟
 	while(count--);
 }
 

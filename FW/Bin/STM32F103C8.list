@@ -776,12 +776,12 @@ static void W25qxx_Delay(uint16_t i)
  80005c0:	af00      	add	r7, sp, #0
  80005c2:	4603      	mov	r3, r0
  80005c4:	80fb      	strh	r3, [r7, #6]
-	size_t count=i*480;//48M时钟
+	size_t count=i*48;//48M时钟
  80005c6:	88fa      	ldrh	r2, [r7, #6]
  80005c8:	4613      	mov	r3, r2
- 80005ca:	011b      	lsls	r3, r3, #4
- 80005cc:	1a9b      	subs	r3, r3, r2
- 80005ce:	015b      	lsls	r3, r3, #5
+ 80005ca:	005b      	lsls	r3, r3, #1
+ 80005cc:	4413      	add	r3, r2
+ 80005ce:	011b      	lsls	r3, r3, #4
  80005d0:	60fb      	str	r3, [r7, #12]
 	while(count--);
  80005d2:	bf00      	nop
